@@ -1,0 +1,60 @@
+{
+  "id": "tutor-platform",
+  "realm": "tutor-platform",
+  "enabled": true,
+  "clients": [
+    {
+      "clientId": "tutor-platform-frontend",
+      "publicClient": true,
+      "directAccessGrantsEnabled": true,
+      "redirectUris": ["http://localhost:3000/*"],
+      "defaultRoles": ["USER"]
+    }
+  ],
+  "roles": {
+    "realm": [
+      {
+        "name": "USER",
+        "description": "Basic user role"
+      },
+      {
+        "name": "ADMIN",
+        "description": "Administrator role"
+      }
+    ]
+  },
+  "users": [
+    {
+      "username": "aymu0817",
+      "enabled": true,
+      "emailVerified": true,
+      "firstName": "Aynur",
+      "lastName": "Muftakhov",
+      "email": "aynur2494@bk.ru",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "admin",
+          "temporary": false
+        }
+      ],
+      "realmRoles": ["USER"]
+    },
+    {
+      "username": "adminuser",
+      "enabled": true,
+      "emailVerified": true,
+      "firstName": "Admin",
+      "lastName": "User",
+      "email": "admin@example.com",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "adminpassword",
+          "temporary": false
+        }
+      ],
+      "realmRoles": ["ADMIN"]
+    }
+  ]
+}

@@ -1,0 +1,111 @@
+version: '3.8'
+
+networks:
+  tutor-platform-network:
+    name: tutor-platform-network
+    driver: bridge
+
+services:
+  keycloak:
+    image: quay.io/keycloak/keycloak:24.0
+    container_name: keycloak
+    environment:
+      KC_HOSTNAME: keycloak
+      KC_HOSTNAME_PORT: 7080
+      KC_HOSTNAME_STRICT_BACKCHANNEL: false
+      KC_HOSTNAME_STRICT: false
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+      KC_HOSTNAME_BACKCHANNEL: http://keycloak:7080
+      KC_LOG_LEVEL: info
+      DB_VENDOR: postgres
+      DB_ADDR: postgres
+      DB_PORT: 5432
+      DB_DATABASE: keycloak_db
+      DB_USER: sysadm
+      DB_PASSWORD: admin
+    ports:
+      - "7080:7080"
+      - "7443:7443"
+    networks:
+      - tutor-platform-network
+    profiles:
+      - keycloak
+    depends_on:
+      - postgres
+    command: ["start-dev", "--http-port", "7080", "--https-port", "7443", "--import-realm"]
+    volumes:
+      - ./keycloak-realm.json:/opt/keycloak/data/import/keycloak-realm.json
+
+  postgres:
+    image: postgres:latest
+    container_name: postgres-container
+    restart: always
+    environment:
+      POSTGRES_USER: sysadm
+      POSTGRES_PASSWORD: admin
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./postgres-init:/docker-entrypoint-initdb.d
+    profiles:
+      - db
+    networks:
+      - tutor-platform-network
+
+  users-service:
+    build:
+      context: ./users-service
+    container_name: users-service
+    restart: always
+    ports:
+      - "8081:8081"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/user_service
+      SPRING_DATASOURCE_USERNAME: sysadm
+      SPRING_DATASOURCE_PASSWORD: admin
+    depends_on:
+      - postgres
+    profiles:
+      - backend
+    networks:
+      - tutor-platform-network
+
+  lessons-service:
+    build:
+      context: ./lessons-service
+    container_name: lessons-service
+    restart: always
+    ports:
+      - "8082:8082"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/lessons_service
+      SPRING_DATASOURCE_USERNAME: sysadm
+      SPRING_DATASOURCE_PASSWORD: admin
+    depends_on:
+      - postgres
+    profiles:
+      - backend
+    networks:
+      - tutor-platform-network
+
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    container_name: nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - users-service
+      - lessons-service
+    profiles:
+      - gw
+    networks:
+      - tutor-platform-network
+
+volumes:
+  postgres-data:
