@@ -1,0 +1,6 @@
+[submodule "users-service"]
+	path = users-service
+	url = https://github.com/AynurMuftakhov/tutor-platfrom-lessons-service.git
+[submodule "lessons-service"]
+	path = lessons-service
+	url = https://github.com/AynurMuftakhov/tutor-platform-user-service.git
