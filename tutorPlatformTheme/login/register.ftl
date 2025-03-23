@@ -44,6 +44,11 @@
         <button type="submit" class="btn material-btn">Register</button>
       </div>
 
+        <div class="auth-links">
+          <#if url.loginUrl??>
+            <a href="${url.loginUrl}">Already have an account? Log In</a>
+          </#if>
+        </div>
     </form>
 
   </div>

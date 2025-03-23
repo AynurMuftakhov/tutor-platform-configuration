@@ -1,42 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Tutor’s Platform - Login</title>
-    <meta charset="UTF-8">
+  <title>Login</title>
+  <meta charset="UTF-8"/>
+  <link rel="stylesheet" href="${url.resourcesPath}/css/custom.css" />
 </head>
 <body>
 
-<div class="header">
-  <div class="header-title">Tutor’s Platform</div>
-</div>
+<div class="kc-wrapper">
+  <div class="material-card">
 
-<div class="kc-container">
-  <div class="login-card">
+    <h2 class="form-title">So happy to see you again!</h2>
 
-    <h2>Login</h2>
+    <#if message?has_content && message.type == "error">
+      <div class="form-error">
+        ${message.summary}
+      </div>
+    </#if>
 
-    <form id="kc-form-login" onsubmit="loginDisabledButton()" action="${url.loginAction}" method="post">
-      <div class="field">
+    <form id="kc-form-login" action="${url.loginAction}" method="post">
+
+      <div class="material-field">
+        <input id="username" name="username" type="text" value="${login.username!}" required />
         <label for="username">Email</label>
-        <input tabindex="1" id="username" name="username" type="text" value="${login.username!}" autofocus />
       </div>
-      <div class="field">
+
+      <div class="material-field">
+        <input id="password" name="password" type="password" required />
         <label for="password">Password</label>
-        <input tabindex="2" id="password" name="password" type="password"/>
       </div>
 
-      <div class="actions">
-        <input tabindex="3" class="btn login-btn" name="login" id="kc-login" type="submit" value="Login"/>
-      </div>
-    </form>
+      <#if realm.rememberMe && !usernameEditDisabled??>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" id="rememberMe" name="rememberMe"
+                   <#if login.rememberMe??>checked</#if> /> Remember me
+          </label>
+        </div>
+      </#if>
 
-    <#if url.registrationUrl??>
-      <a class="secondary-link" href="${url.registrationUrl}">Sign Up</a>
-    </#if>
+   <div class="actions">
+     <input class="material-btn" name="login" id="kc-login" type="submit" value="Login" />
+   </div>
 
-    <#if url.loginResetCredentialsUrl??>
-      <a class="secondary-link" href="${url.loginResetCredentialsUrl}">Forgot Password</a>
-    </#if>
+   <div class="auth-links">
+     <#if url.loginResetCredentialsUrl??>
+       <a href="${url.loginResetCredentialsUrl}">Forgot Password?</a>
+     </#if>
+     <#if url.registrationUrl??>
+       <a href="${url.registrationUrl}">Don’t have an account? Sign Up</a>
+     </#if>
+   </div>
 
   </div>
 </div>

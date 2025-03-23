@@ -6,6 +6,7 @@
   "registrationEmailAsUsername": true,
   "loginWithEmailAllowed": true,
   "resetPasswordAllowed": true,
+  "loginTheme": "tutorPlatformTheme",
   "clients": [
     {
       "clientId": "tutor-platform-frontend",
@@ -60,5 +61,19 @@
       ],
       "realmRoles": ["ADMIN"]
     }
-  ]
+  ],
+  "smtpServer": {
+    "replyToDisplayName": "",
+    "starttls": "true",
+    "auth": "true",
+    "envelopeFrom": "",
+    "ssl": "false",
+    "password": "**********",
+    "port": "587",
+    "replyTo": "aynur2394@gmail.com",
+    "host": "smtp.gmail.com",
+    "from": "aynur2394@gmail.com",
+    "fromDisplayName": "Tutor Platform Team",
+    "user": "aynur2394@gmail.com"
+  }
 }
