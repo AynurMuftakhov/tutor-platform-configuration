@@ -2,6 +2,10 @@
   "id": "tutor-platform",
   "realm": "tutor-platform",
   "enabled": true,
+  "registrationAllowed": true,
+  "registrationEmailAsUsername": true,
+  "loginWithEmailAllowed": true,
+  "resetPasswordAllowed": true,
   "clients": [
     {
       "clientId": "tutor-platform-frontend",
