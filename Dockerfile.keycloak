@@ -1,0 +1,7 @@
+FROM quay.io/keycloak/keycloak:24.0
+
+USER root
+COPY ./keycloak-user-sync/target/keycloak-user-sync-1.0-0.jar /opt/keycloak/providers/user-sync-listener.jar
+
+USER keycloak
+RUN /opt/keycloak/bin/kc.sh build

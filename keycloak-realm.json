@@ -27,53 +27,5 @@
         "description": "Administrator role"
       }
     ]
-  },
-  "users": [
-    {
-      "username": "aymu0817",
-      "enabled": true,
-      "emailVerified": true,
-      "firstName": "Aynur",
-      "lastName": "Muftakhov",
-      "email": "aynur2494@bk.ru",
-      "credentials": [
-        {
-          "type": "password",
-          "value": "admin",
-          "temporary": false
-        }
-      ],
-      "realmRoles": ["USER"]
-    },
-    {
-      "username": "adminuser",
-      "enabled": true,
-      "emailVerified": true,
-      "firstName": "Admin",
-      "lastName": "User",
-      "email": "admin@example.com",
-      "credentials": [
-        {
-          "type": "password",
-          "value": "adminpassword",
-          "temporary": false
-        }
-      ],
-      "realmRoles": ["ADMIN"]
-    }
-  ],
-  "smtpServer": {
-    "replyToDisplayName": "",
-    "starttls": "true",
-    "auth": "true",
-    "envelopeFrom": "",
-    "ssl": "false",
-    "password": "**********",
-    "port": "587",
-    "replyTo": "aynur2394@gmail.com",
-    "host": "smtp.gmail.com",
-    "from": "aynur2394@gmail.com",
-    "fromDisplayName": "Tutor Platform Team",
-    "user": "aynur2394@gmail.com"
   }
 }
