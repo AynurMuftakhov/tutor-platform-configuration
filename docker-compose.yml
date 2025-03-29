@@ -72,6 +72,8 @@ services:
       - backend
     networks:
       - tutor-platform-network
+    volumes:
+      - user-avatars:/app/uploads/avatars
 
   lessons-service:
     build:
@@ -110,3 +112,4 @@ services:
 
 volumes:
   postgres-data:
+  user-avatars:
