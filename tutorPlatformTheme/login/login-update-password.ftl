@@ -1,40 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <title>Set a New Password</title>
-  <meta charset="UTF-8" />
+  <title>Set Your Password</title>
   <link rel="stylesheet" href="${url.resourcesPath}/css/custom.css" />
 </head>
 <body>
-
 <div class="kc-wrapper">
   <div class="material-card">
-
-    <h2 class="form-title">Create a New Password</h2>
-
-    <#if message?has_content && message.type == "error">
-      <div class="form-error">${message.summary}</div>
-    </#if>
+    <h2 class="form-title">Set your new password 🔐</h2>
 
     <form id="kc-passwd-update-form" action="${url.loginAction}" method="post">
-
       <div class="material-field">
-        <input type="password" id="password-new" name="password-new" placeholder=" " required />
+        <input id="password-new" name="password-new" type="password" required />
         <label for="password-new">New Password</label>
       </div>
 
       <div class="material-field">
-        <input type="password" id="password-confirm" name="password-confirm" placeholder=" " required />
-        <label for="password-confirm">Confirm New Password</label>
+        <input id="password-confirm" name="password-confirm" type="password" required />
+        <label for="password-confirm">Confirm Password</label>
       </div>
 
       <div class="actions">
-        <input class="material-btn" type="submit" value="Update Password" />
+        <input class="material-btn" type="submit" value="Save Password" />
       </div>
     </form>
-
   </div>
 </div>
-
 </body>
 </html>

@@ -17,7 +17,7 @@ services:
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: admin
       KC_HOSTNAME_BACKCHANNEL_DYNAMIC: "true"
-      KC_LOG_LEVEL: info
+      KC_LOG_LEVEL: DEBUG
       KC_DB: postgres
       KC_DB_URL_HOST: postgres
       KC_DB_URL_PORT: 5432
@@ -66,6 +66,11 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/user_service
       SPRING_DATASOURCE_USERNAME: sysadm
       SPRING_DATASOURCE_PASSWORD: admin
+      KEYCLOAK_URL: ${KEYCLOAK_URL}
+      KEYCLOAK_REALM: ${KEYCLOAK_REALM}
+      KEYCLOAK_CLIENT_ID: ${KEYCLOAK_CLIENT_ID}
+      KEYCLOAK_CLIENT_SECRET: ${KEYCLOAK_CLIENT_SECRET}
+      KEYCLOAK_REDIRECT_URI: ${KEYCLOAK_REDIRECT_URI}
     depends_on:
       - postgres
     profiles:
