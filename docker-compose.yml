@@ -70,7 +70,6 @@ services:
       KEYCLOAK_REALM: ${KEYCLOAK_REALM}
       KEYCLOAK_CLIENT_ID: ${KEYCLOAK_CLIENT_ID}
       KEYCLOAK_CLIENT_SECRET: ${KEYCLOAK_CLIENT_SECRET}
-      KEYCLOAK_REDIRECT_URI: ${KEYCLOAK_REDIRECT_URI}
     depends_on:
       - postgres
     profiles:
@@ -115,6 +114,16 @@ services:
     networks:
       - tutor-platform-network
 
+  mailhog:
+    container_name: mailhog
+    image: mailhog/mailhog
+    ports:
+      - "8025:8025"   # Web UI
+      - "1025:1025"   # SMTP
+    networks:
+      - tutor-platform-network
+    profiles:
+        - dev
 volumes:
   postgres-data:
   user-avatars:
