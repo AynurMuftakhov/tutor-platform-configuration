@@ -17,7 +17,7 @@ services:
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: admin
       KC_HOSTNAME_BACKCHANNEL_DYNAMIC: "true"
-      KC_LOG_LEVEL: DEBUG
+      KC_LOG_LEVEL: INFO
       KC_DB: postgres
       KC_DB_URL_HOST: postgres
       KC_DB_URL_PORT: 5432
@@ -102,6 +102,23 @@ services:
       - backend
     networks:
       - tutor-platform-network
+
+  frontend-service:
+    build:
+      context: ./tutor-platform-frontend
+    container_name: frontend-service
+    restart: always
+    ports:
+      - "3000:3000"
+    profiles:
+      - frontend
+    volumes:
+      - ./tutor-platform-frontend:/app
+      - /app/node_modules
+    networks:
+      - tutor-platform-network
+    environment:
+      - CHOKIDAR_USEPOLLING=true
 
   nginx:
     build:
