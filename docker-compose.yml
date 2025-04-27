@@ -167,6 +167,22 @@ services:
       JAVA_TOOL_OPTIONS: >-
         -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5008
 
+  video-service:
+    build:
+      context: video-service
+    container_name: video-service
+    restart: always
+    ports:
+      - "8085:8085"
+      - "5009:5009"
+    profiles:
+      - backend
+    networks:
+      - tutor-platform-network
+    environment:
+      JAVA_TOOL_OPTIONS: >-
+        -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5008
+
   nginx:
     build:
       context: ./nginx
