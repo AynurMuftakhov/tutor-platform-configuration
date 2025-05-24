@@ -10,7 +10,7 @@
 <div class="kc-wrapper">
   <div class="material-card">
 
-    <h2 class="form-title">So happy to see you again!</h2>
+    <h2 class="form-title">Login to Speakshire</h2>
 
     <#if message?has_content && message.type == "error">
       <div class="form-error">
