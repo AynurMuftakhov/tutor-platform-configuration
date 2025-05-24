@@ -44,7 +44,7 @@
             <#if requiredActions?? && (requiredActions?size > 0)>
                 <a class="material-btn center-btn" href="${actionUri}">Continue</a>
             <#else>
-               <a class="material-btn center-btn" href="${properties.appUrl}">Go to Tutoria</a>
+               <a class="material-btn center-btn" href="${properties.appUrl}">Go to speakshire.com</a>
             </#if>
         </div>
 

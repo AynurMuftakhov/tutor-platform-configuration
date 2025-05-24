@@ -1,11 +1,11 @@
 <#import "template.ftl" as layout>
 <@layout.emailLayout>
     <div class="container">
-        <div class="title">Welcome to Tutoria 👋</div>
+        <div class="title">Welcome to SpeakShire 👋</div>
 
         <p>Hi <strong>${user.firstName}</strong>,</p>
 
-        <p>Your tutor has just created an account for you on <strong>Tutoria</strong>.</p>
+        <p>Your tutor has just created an account for you on <strong>SpeakShire.com</strong>.</p>
 
         <p>To begin your learning journey, please click the button below to set your password:</p>
 
@@ -17,7 +17,7 @@
 
         <div class="footer">
             Good luck on your learning journey!<br />
-            — The Tutoria Team
+            — The SpeakShire Team
         </div>
     </div>
 </@layout.emailLayout>

@@ -1,4 +1,4 @@
-Set your password to access Tutoria!
+Set your password to access SpeakShire!
 
 Please click the following link to update your password:
 ${link}
