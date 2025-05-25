@@ -30,8 +30,6 @@ services:
       - "7443:7443"
     networks:
       - tutor-platform-network
-    profiles:
-      - keycloak
     depends_on:
       - postgres
     command: ["start-dev", "--http-port", "7080", "--https-port", "7443", "--import-realm"]
@@ -51,8 +49,6 @@ services:
     volumes:
       - postgres-data:/var/lib/postgresql/data
       - ./postgres-init:/docker-entrypoint-initdb.d
-    profiles:
-      - db
     networks:
       - tutor-platform-network
 
@@ -76,12 +72,12 @@ services:
         -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5006
     depends_on:
       - postgres
-    profiles:
-      - backend
     networks:
       - tutor-platform-network
     volumes:
       - user-avatars:/app/uploads/avatars
+    env_file:
+      - ./users-service/.env
 
   lessons-service:
     build:
@@ -100,8 +96,6 @@ services:
         -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005
     depends_on:
       - postgres
-    profiles:
-      - backend
     networks:
       - tutor-platform-network
 
@@ -112,8 +106,6 @@ services:
     restart: always
     ports:
       - "3000:3000"
-    profiles:
-      - frontend
     volumes:
       - ./tutor-platform-frontend:/app
     networks:
@@ -129,8 +121,6 @@ services:
     ports:
       - "8083:8083"
       - "5007:5007"
-    profiles:
-      - backend
     networks:
       - tutor-platform-network
     depends_on:
@@ -152,8 +142,6 @@ services:
     ports:
       - "8084:8084"
       - "5008:5008"
-    profiles:
-      - backend
     networks:
       - tutor-platform-network
     depends_on:
@@ -175,8 +163,6 @@ services:
     ports:
       - "8085:8085"
       - "5009:5009"
-    profiles:
-      - backend
     networks:
       - tutor-platform-network
     environment:
@@ -196,8 +182,6 @@ services:
     depends_on:
       - users-service
       - lessons-service
-    profiles:
-      - gw
     networks:
       - tutor-platform-network
 
@@ -210,8 +194,6 @@ services:
       - "1025:1025"   # SMTP
     networks:
       - tutor-platform-network
-    profiles:
-        - mail
 
   zookeeper:
     image: confluentinc/cp-zookeeper:7.6.0
@@ -222,8 +204,6 @@ services:
       ZOOKEEPER_TICK_TIME: 2000
     networks:
       - tutor-platform-network
-    profiles:
-      - kafka
 
   kafka:
     image: confluentinc/cp-kafka:7.6.0
@@ -241,8 +221,6 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
     networks:
       - tutor-platform-network
-    profiles:
-      - kafka
 
   kafka-ui:
     image: provectuslabs/kafka-ui:latest
@@ -258,8 +236,6 @@ services:
       KAFKA_CLUSTERS_0_ZOOKEEPER: zookeeper:2181
     networks:
       - tutor-platform-network
-    profiles:
-      - kafka
 
 volumes:
   postgres-data:
