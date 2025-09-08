@@ -19,7 +19,7 @@ services:
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: admin
       KC_HOSTNAME_BACKCHANNEL_DYNAMIC: "true"
-      KC_LOG_LEVEL: DEBUG
+      KC_LOG_LEVEL: INFO
       KC_DB: postgres
       KC_DB_URL_HOST: postgres
       KC_DB_URL_PORT: 5432
@@ -87,6 +87,8 @@ services:
       - postgres
     networks:
       - tutor-platform-network
+    env_file:
+      - lessons.env
 
   frontend-service:
     image: ghcr.io/aynurmuftakhov/tutor-platform-frontend:latest
@@ -128,6 +130,10 @@ services:
       SPRING_DATASOURCE_PASSWORD: admin
       KAFKA_BOOTSTRAP_SERVERS: kafka:9092
       JAVA_OPTS: "-Xms64m -Xmx128m"
+    env_file:
+      - vocabulary.env
+    volumes:
+      - vocabulary-audio:/app/public/audio
 
   video-service:
     image: ghcr.io/aynurmuftakhov/video-service:latest
@@ -137,6 +143,8 @@ services:
       - tutor-platform-network
     environment:
       JAVA_OPTS: "-Xms64m -Xmx64m"
+    env_file:
+      - video.env
 
   nginx:
     build:
@@ -199,3 +207,4 @@ services:
 volumes:
   postgres-data:
   user-avatars:
+  vocabulary-audio:

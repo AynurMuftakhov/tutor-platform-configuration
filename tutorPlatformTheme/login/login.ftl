@@ -22,7 +22,7 @@
 
       <div class="material-field">
         <input id="username" name="username" type="text" value="${login.username!}" required />
-        <label for="username">Email</label>
+        <label for="username">Email or username</label>
       </div>
 
       <div class="material-field">
