@@ -29,7 +29,7 @@ A modern web-based platform for connecting tutors and students. The app features
 •	Validates JWT via resty.openidc
 •	Extracts user info (sub, email, roles)
 •	Passes them to backend via headers
-4.	Backend uses X-User / X-User-Email headers to identify the user
+4.	Backend uses X-User-Id / X-User-Email headers to identify the user
 5.	If isOnboarded === false, the frontend redirects the user to the onboarding flow
 
 👉 See docs/auth.md for more.

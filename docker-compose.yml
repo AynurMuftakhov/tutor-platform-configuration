@@ -159,9 +159,28 @@ services:
       - tutor-platform-network
     environment:
       JAVA_TOOL_OPTIONS: >-
-        -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5008
+        -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5009
     env_file:
       - ./video-service/.video.env
+
+  homework-service:
+    build:
+      context: homework-service
+    container_name: homework-service
+    restart: always
+    ports:
+      - "8086:8086"
+      - "5010:5010"
+    networks:
+      - tutor-platform-network
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/homework_service
+      SPRING_DATASOURCE_USERNAME: sysadm
+      SPRING_DATASOURCE_PASSWORD: admin
+      JAVA_TOOL_OPTIONS: >-
+        -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5010
+    env_file:
+      - ./homework-service/.homework.env
 
   nginx:
     build:
