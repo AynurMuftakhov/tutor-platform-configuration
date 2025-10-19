@@ -97,6 +97,8 @@ services:
       - tutor-platform-network
     env_file:
       - lessons.env
+    volumes:
+      - lessons-uploads:/app/uploads
 
   frontend-service:
     image: ghcr.io/aynurmuftakhov/tutor-platform-frontend:latest
@@ -242,3 +244,4 @@ volumes:
   postgres-data:
   user-avatars:
   vocabulary-audio:
+  lessons-uploads:
